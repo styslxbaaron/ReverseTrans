@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <!-- Original Bootstrap CSS from CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .code-container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1em;
+            font-family: monospace;
+        }
+        .line-number {
+            counter-reset: line;
+            padding: 0 1em;
+            text-align: right;
+            color: #6c757d;
+            border-right: 1px solid #ddd;
+            background: #f8f9fa;
+        }
+        .line-number::before {
+            content: counter(line);
+            counter-increment: line;
+            display: block;
+        }
+        pre {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Result</h1>
+        <!-- Download Button -->
+        <a href="{{ url_for('download_file', filename=file_name) }}" class="btn btn-primary mb-4">Download JSON</a>
+        
+        <!-- JSON Display -->
+        <div class="code-container">
+            <div class="line-number"></div>
+            <pre>{{ json_output }}</pre>
+        </div>
+    </div>
+
+    <!-- Original Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

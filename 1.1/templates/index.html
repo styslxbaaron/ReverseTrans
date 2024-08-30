@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein to RNA Sequence Translator 1.1</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 自定义CSS -->
+    <style>
+        .word-break {
+            word-break: break-all;
+        }
+    </style>
+    <!-- 引入jQuery和Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center my-4">Protein to RNA Sequence Translator 1.1</h1>
+    <form method="post" class="bg-light p-4 rounded">
+        <div class="form-group">
+            <label for="protein_sequence">Protein Sequence:</label>
+            <textarea id="protein_sequence" name="protein_sequence" class="form-control" rows="4"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="codon_table">Select Codon Table:</label>
+            <select id="codon_table" name="codon_table" class="form-control">
+                {% for table_name in codon_tables %}
+                <option value="{{ table_name }}">{{ table_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="forced_codons">Forced Codons (one per line, format: M AUG):</label>
+            <textarea id="forced_codons" name="forced_codons" class="form-control" rows="4"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Translate</button>
+    </form>
+    
+    {% if rna_sequence %}
+    <h2 class="my-4">RNA Sequence:</h2>
+    <div class="alert alert-info rna-sequence word-break">{{ rna_sequence|safe }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>

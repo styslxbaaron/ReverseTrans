@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <!-- Original Bootstrap CSS from CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .img-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .file-list {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Codon Frequency Data Input</h1>
+        <form method="post" action="/">
+            <div class="form-group">
+                <label for="data">Paste your data here:</label>
+                <textarea class="form-control" id="data" name="data" rows="10" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Instructions Section -->
+        <div class="mt-4">
+            <h2>Instructions</h2>
+            <p>To use this tool, paste the data from the Kazusa Codon Usage Database into the text area. You can find the codon frequency database at the following location:</p>
+            <p><a href="https://www.kazusa.or.jp/codon/" target="_blank">Kazusa Codon Usage Database</a></p>
+            <p>Below is an example of the data format expected, copy the gray part to the input box above:</p>
+            <div class="img-container">
+                <img src="{{ url_for('static', filename='Codon usage table - www.kazusa.or.jp.png') }}" alt="Codon Usage Table">
+            </div>
+        </div>
+
+        <!-- File List Section -->
+        <div class="file-list mt-4">
+            <h2>Generated Files</h2>
+            <ul class="list-group">
+                {% for file in files %}
+                    <li class="list-group-item">
+                        <a href="{{ url_for('download_file', filename=file) }}">{{ file }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Original Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
